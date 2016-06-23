@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+
 const Semver = require('semver');
 const application = require('commander');
 const package = require('../package.json');
