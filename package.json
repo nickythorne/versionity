@@ -1,6 +1,6 @@
 {
   "name": "versionity",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "CLI application which wraps the semver specification to control the version of an npm package.",
   "preferGlobal": true,
   "bin": {

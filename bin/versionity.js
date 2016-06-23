@@ -26,7 +26,7 @@ application.action(function(semverReleaseType) {
         applicationSemver.inc(semverReleaseType, application.identifier);
 
         npmUpdateVersion(applicationSemver.version, function(newVersion) {
-            console.log('Successfully updated the version number from: v' + applicationPackage.version + ' to ' + newVersion.replace(/\n$/, ''));
+            console.log('Successfully updated package: ' + applicationPackage.name + ' version from: ' + applicationPackage.version + ' to ' + newVersion.replace(/\n$/, ''));
             (application.publish) ? npmPublish(applicationPackage.version) : process.exit();
         });
 
@@ -60,7 +60,7 @@ function npmPublish(revertVersion) {
             });
         }
 
-        console.log('Successfully published module. ' + stdout);
+        console.log('Successfully published package. ' + stdout);
         process.exit();
 
     });
