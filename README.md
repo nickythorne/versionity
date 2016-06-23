@@ -24,6 +24,7 @@ Usage
       -p, --publish                  Automatically publishes the application after performing the version update
 
 
+
 The CLI supports any of the [semver](https://github.com/npm/node-semver) release type commands for incrementing the version number, this includes:
 
 + major

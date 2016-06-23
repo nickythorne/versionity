@@ -15,6 +15,10 @@
     "package",
     "publish"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nickythorne/versionity.git"
+  },
   "author": "Nicky Thorne (self@nickythorne.me)",
   "license": "ISC",
   "dependencies": {
