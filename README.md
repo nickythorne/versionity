@@ -53,26 +53,26 @@ The below examples are based on an initial package version of: 0.1.0:
 The following command will update the package.json version to 1.0.0 as it's a major version change.
 
     versionity major
-    Successfully updated the version number from: v0.1.0 to v1.0.0
+    Successfully updated package: header-router version from: v0.1.0 to v1.0.0
     
 The following will update the version to the next patch version:
 
     versionity patch
-    Successfully updated the version number from: v1.0.0 to v1.0.1
+    Successfully updated package: header-router version from: v1.0.0 to v1.0.1
     
 The following will perform a prerelease version update:
 
     versionity prerelease
-    Successfully updated the version number from: v1.0.1 to v1.0.2-0
+    Successfully updated package: header-router version from: v1.0.1 to v1.0.2-0
     
 When specify any pre-* release semver update, you can use the --identifier, or -i option to specify a custom identifier. Example:
 
     versionity preminor --identifier SNAPSHOT
-    Successfully updated the version number from: v1.0.2-0 to v1.1.0-SNAPSHOT.0
+    Successfully updated package: header-router version from: v1.0.2-0 to v1.1.0-SNAPSHOT.0
     
 In additon, you can also request `versionity` to publish the module to a pre-configured npm registry by adding the --publish options. Examples below performs a major version update and publishes the new versioned package:
 
-    Successfully updated the version number from: v1.1.0-SNAPSHOT.0 to v2.0.0
+    Successfully updated package: header-router version from: v1.1.0-SNAPSHOT.0 to v2.0.0
     Publishing package...
     Successfully published module. + header-router@2.0.0
     
