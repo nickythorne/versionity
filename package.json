@@ -1,0 +1,25 @@
+{
+  "name": "versionity",
+  "version": "1.1.0-0",
+  "description": "CLI application which wraps the semver specification to control the version of an npm package.",
+  "preferGlobal": true,
+  "bin": {
+    "versionity": "./bin/versionity.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "version",
+    "semver",
+    "package",
+    "publish"
+  ],
+  "author": "Nicky Thorne (self@nickythorne.me)",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^2.9.0",
+    "npm": "^3.9.6",
+    "semver": "^5.1.0"
+  }
+}
