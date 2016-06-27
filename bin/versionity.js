@@ -54,15 +54,15 @@ function npmPublish(revertVersion) {
 
     exec('npm publish', function(error, stdout) {
 
-        var error = true;
         if(error) {
             npmUpdateVersion(revertVersion, function() {
                 throw Error('An error occurred when attempting to publish. Reverted package update. Error:' + error);
+                process.exit();
             });
+        } else {
+            console.log('Successfully published package. ' + stdout);
+            process.exit();
         }
-
-        console.log('Successfully published package. ' + stdout);
-        process.exit();
 
     });
 
