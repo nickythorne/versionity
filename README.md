@@ -23,6 +23,7 @@ Usage
       -i. --identifier [identifier]  A custom identifier that can be specified for pre-type version updates.
       -p, --publish                  Automatically publishes the application after performing the version update
       -d, --directory                Change the directory where the package.json is located.
+      -vo, --versionOnly             This will only output the updated version number to stdout. All other logging is disabled.
 
 
 

@@ -14,6 +14,7 @@ application.version(package.version)
     .option('-i. --identifier [identifier]', 'A custom identifier that can be specified for pre-type version updates.')
     .option('-p, --publish', 'Automatically publishes the application after performing the version update.')
     .option('-d, --directory [directory]', 'Change the directory where the package.json is located.')
+    .option('-vo, --versionOnly', 'When this flag is present, only the updated version number is output to stdout.')
     .on('--help', utils.displayCustomHelpMessage);
 
 
@@ -29,8 +30,21 @@ application.action(function(semverReleaseType) {
         applicationSemver.inc(semverReleaseType, application.identifier);
 
         npmUpdateVersion(applicationSemver.version, function(newVersion) {
-            console.log('Successfully updated package: ' + applicationPackage.name + ' version from: ' + applicationPackage.version + ' to ' + newVersion.replace(/\n$/, ''));
-            (application.publish) ? npmPublish(applicationPackage.version) : process.exit();
+            
+            displayMessage('Successfully updated package: ' + applicationPackage.name + ' version from: ' + applicationPackage.version + ' to ' + newVersion);
+            
+            if(application.publish) {
+                
+                npmPublish(applicationPackage.version, function() {
+                    displayMessage(newVersion, true);
+                    process.exit();
+                })
+                
+            } else {
+                displayMessage(newVersion, true);
+                process.exit();
+            }
+            
         });
 
     } catch(e) {
@@ -44,29 +58,42 @@ function npmUpdateVersion(newVersion, callback) {
     exec('npm version ' + newVersion, function(error, stdout) {
 
         if(error) throw Error('An error occurred updating the package version: Error: ' + error);
-        callback(stdout);
+        callback(stdout.replace(/\n$/, ''));
 
     });
 
 }
 
-function npmPublish(revertVersion) {
+function npmPublish(revertVersion, callback) {
 
-    console.log('Publishing package...');
+    displayMessage('Publishing package...');
 
     exec('npm publish', function(error, stdout) {
 
         if(error) {
             npmUpdateVersion(revertVersion, function() {
                 throw Error('An error occurred when attempting to publish. Reverted package update. Error:' + error);
-                process.exit();
+                callback();
             });
         } else {
-            console.log('Successfully published package. ' + stdout);
-            process.exit();
+            displayMessage('Successfully published package. ' + stdout);
+            callback();
         }
 
     });
+
+}
+
+
+function displayMessage(message, versionOnly) {
+
+    if(!application.versionOnly && !versionOnly) {
+        console.log(message)
+    }
+
+    if(application.versionOnly && versionOnly) {
+        console.log(message);
+    }
 
 }
 
