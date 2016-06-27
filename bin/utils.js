@@ -2,9 +2,8 @@ const  path = require('path');
 
 function validateApplicationRun(application, errorMessage) {
     
-    if(!getNodePackageFile()) {
-        console.error(errorMessage);
-        process.exit(1);
+    if(!getNodePackageFile(application.directory)) {
+        throw Error(errorMessage);
     }
 
     if(process.argv.length <= 2) {
@@ -14,11 +13,11 @@ function validateApplicationRun(application, errorMessage) {
     
 }
 
-function getNodePackageFile() {
+function getNodePackageFile(overrideDirectory) {
     
     try {
 
-        var currentDirectory = process.cwd();
+        var currentDirectory = overrideDirectory || process.cwd();
         var directoryPackagePath = path.join(currentDirectory, 'package.json');
         require.resolve(directoryPackagePath);
 

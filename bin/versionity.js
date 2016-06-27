@@ -13,13 +13,15 @@ application.version(package.version)
     .description('Performs a semver version update on the current directory package.json file, based on the release type specified.')
     .option('-i. --identifier [identifier]', 'A custom identifier that can be specified for pre-type version updates.')
     .option('-p, --publish', 'Automatically publishes the application after performing the version update.')
+    .option('-d, --directory [directory]', 'Change the directory where the package.json is located.')
     .on('--help', utils.displayCustomHelpMessage);
 
-utils.validateApplicationRun(application, INVALID_DIRECTORY_ERROR);
 
 application.action(function(semverReleaseType) {
 
-    var applicationPackage = utils.getNodePackageFile();
+    utils.validateApplicationRun(application, INVALID_DIRECTORY_ERROR);
+    
+    var applicationPackage = utils.getNodePackageFile(application.directory);
     var applicationSemver = new Semver(applicationPackage.version);
 
     try {
@@ -70,3 +72,4 @@ function npmPublish(revertVersion) {
 
 
 application.parse(process.argv);
+
